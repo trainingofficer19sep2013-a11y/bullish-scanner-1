@@ -1,0 +1,19 @@
+# Render Blueprint — Bullish Pattern Scanner Backend
+# ====================================================
+# This file lets Render auto-configure your deployment.
+# Just push this file to GitHub, connect repo to Render, and it auto-detects.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: bullish-scanner-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+    healthCheckPath: /
+    autoDeploy: true
+    plan: free
